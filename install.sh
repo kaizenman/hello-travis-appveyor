@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Installing for Linux"
 if [ ! -d "build" ]; then
    #create build directory if it not exist
    mkdir build

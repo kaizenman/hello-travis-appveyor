@@ -11,7 +11,7 @@ $tag = (Invoke-WebRequest $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_
 
 $download = "https://github.com/$repo/releases/download/$tag/$file"
 $name = $file.Split(".")[0]
-$exe = "$name.exe"
+$exe = "bin\$name.exe"
 
 Write-Host Dowloading latest release
 Invoke-WebRequest $download -Out $exe -UseBasicParsing
