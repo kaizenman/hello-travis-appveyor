@@ -1,0 +1,19 @@
+version: 1.0.{build}
+before_build:
+- cmd: >-
+    mkdir build
+
+    cd build
+
+    cmake ..
+build:
+  project: C:\projects\hello-world\build\hello_world.sln
+  verbosity: minimal
+artifacts:
+- path: build\bin\Debug\run_windows.exe
+  name: run
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: ZZGt/h/YLoN5R39t8OtV6KxrySfxg1YunMn3pJalG4z9zlVTABCf0NjHFySzXpzi
+  artifact: build\bin\Debug\run_windows.exe
