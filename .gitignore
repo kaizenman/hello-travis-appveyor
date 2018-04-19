@@ -7,3 +7,5 @@
 /cmake-build-debug
 /HelloBuild
 /build
+/utils/Linux/run_linux
+/utils/Windows/run_windows.exe
