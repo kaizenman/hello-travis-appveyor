@@ -1,3 +1,4 @@
+echo "Running updater..."
 if [ ! -d "bin" ]; then
    mkdir bin
 fi

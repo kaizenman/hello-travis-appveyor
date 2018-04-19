@@ -22,6 +22,6 @@ cp -uvf build/bin/run_linux bin/
 
 echo "deleting build directory..."
 rm -r build
-echo "checking for updates..."
+
 source updater.sh
 echo "Done"
