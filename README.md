@@ -1,2 +1,2 @@
 # hello-world
-Hello Github and Travis
+Hello Github, Travis, AppVeyor!
