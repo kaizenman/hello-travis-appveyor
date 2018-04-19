@@ -34,11 +34,6 @@ void CrossPlatformHelloFunc()
 #endif
 }
 
-void function()
-{
-
-}
-
 int main() {
 	CrossPlatformHelloFunc();
 }
