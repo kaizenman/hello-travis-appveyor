@@ -1,7 +1,9 @@
 os:
 - linux
 - osx
-language: cpp
+language: 
+- cpp
+- android
 script:
 - mkdir build
 - cd build

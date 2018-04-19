@@ -24,7 +24,7 @@ void CrossPlatformHelloFunc()
 #elif TARGET_OS_IPHONE
 	// iOS device
 #elif TARGET_OS_MAC
-    std::cout << "Hello, MacOsX" << std::endl;
+    std::cout << "Hello, MacOSX" << std::endl;
 	// Other kinds of Mac OS
 #else
 #   error "Unknown Apple platform"
