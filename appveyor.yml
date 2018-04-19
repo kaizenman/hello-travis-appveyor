@@ -18,4 +18,4 @@ deploy:
 - provider: GitHub
   auth_token:
     secure: ZZGt/h/YLoN5R39t8OtV6KxrySfxg1YunMn3pJalG4z9zlVTABCf0NjHFySzXpzi
-  artifact: build\bin\Debug\run_windows.exe
+  artifact: build\bin\Release\run_windows.exe
