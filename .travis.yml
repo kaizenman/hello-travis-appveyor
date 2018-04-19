@@ -1,37 +1,44 @@
-matrix:
-  include:
-    - language: c++
-      os:
-      - linux
-      - osx
-      script:
-        - mkdir build
-        - cd build
-        - cmake ..
-        - make
-      before_deploy:
-        - git config --local user.name makolyan
-        - git config --local user.email makolyan2@ukr.net
-        - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-      deploy:
-      provider: releases
-      api_key:
-        secure: Ya8fzVgwNtLdWnxZMDH/09GAWm3lI5DXeN0gBymObgnJkHDvxXD6wNcLNN3ck0bxAwiAf0RL+19gWSGoFnrftHzqCA9XEBoXYYAjNU6CAnXcS9hmgaat41HbTXsYzY5gRa9miBPrhbGMZ9yi9X37XxnJwXYMWsUqcq10BEYVEVvld4emQH5+sGKkettqMKRI2UiBcjui8zkFfnPQa+gBekArhndfV8JPm+zVDieBcWkcfHGQdnHNbDFMtgva4HL87oxKzYJID4eFMgllTaGE0/P3QV/ee14yjpmv164VWwpABFsNuXye6ji/+/qVeZ5kJqzMiVvENVFOvuiyFoB5rBDke/x9W4cmSe8SdiTeDb6+9h3W5G59Mf8ibm/wRemBz5LThHk//7smWzMfC3OYW21hfPQ/paqUNC0AeYZ18m+hX2YsrK8vcwBwwVYZNd4Lc+nYzlqY5pSWqyrk8Y2M/m66Roz9kTJlGxltDcJjiUp6217DS2vK3tZFOwOLNUJ97/lIX45D25HGqJMnRXSV4+MzPMVIo3ard0d5SejBzlYcH891mGA6jgqJgOqfn3ElVuOBFvTTDJLRi91Xvajj91zrrteLB70zhZKkMSyN5mG8NGCeT8gjsV4G7Y5du9NW0fvM0sOC+VY9F89Rew1xIlixV88Ssz0WaVPvGfUNM2k=
-      file: 
-        - bin/run_linux 
-        - bin/run_darwin
-      skip_cleanup: true
-      on:
-        repo: makolyan/hello-world
-        all_branches: true  
-
-    - language: android
-      android:
-        components:
-          - build-tools-26.0.2
-          - android-26
-          - extra-google-google_play_services
-          - extra-google-m2repository
-          - extra-android-m2repository
-          - addon-google_apis-google-26
-          - sys-img-armeabi-v7a-android-26
+language: c++
+  matrix:
+    include:
+      - language: c++
+        os:
+        - linux
+        - osx
+        script:
+          - mkdir build
+          - cd build
+          - cmake ..
+          - make
+        before_deploy:
+          - git config --local user.name makolyan
+          - git config --local user.email makolyan2@ukr.net
+          - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+        deploy:
+        provider: releases
+        api_key:
+          secure: Ya8fzVgwNtLdWnxZMDH/09GAWm3lI5DXeN0gBymObgnJkHDvxXD6wNcLNN3ck0bxAwiAf0RL+19gWSGoFnrftHzqCA9XEBoXYYAjNU6CAnXcS9hmgaat41HbTXsYzY5gRa9miBPrhbGMZ9yi9X37XxnJwXYMWsUqcq10BEYVEVvld4emQH5+sGKkettqMKRI2UiBcjui8zkFfnPQa+gBekArhndfV8JPm+zVDieBcWkcfHGQdnHNbDFMtgva4HL87oxKzYJID4eFMgllTaGE0/P3QV/ee14yjpmv164VWwpABFsNuXye6ji/+/qVeZ5kJqzMiVvENVFOvuiyFoB5rBDke/x9W4cmSe8SdiTeDb6+9h3W5G59Mf8ibm/wRemBz5LThHk//7smWzMfC3OYW21hfPQ/paqUNC0AeYZ18m+hX2YsrK8vcwBwwVYZNd4Lc+nYzlqY5pSWqyrk8Y2M/m66Roz9kTJlGxltDcJjiUp6217DS2vK3tZFOwOLNUJ97/lIX45D25HGqJMnRXSV4+MzPMVIo3ard0d5SejBzlYcH891mGA6jgqJgOqfn3ElVuOBFvTTDJLRi91Xvajj91zrrteLB70zhZKkMSyN5mG8NGCeT8gjsV4G7Y5du9NW0fvM0sOC+VY9F89Rew1xIlixV88Ssz0WaVPvGfUNM2k=
+        file: 
+          - bin/run_linux 
+          - bin/run_darwin
+        skip_cleanup: true
+        on:
+          repo: makolyan/hello-world
+          all_branches: true  
+      - language: android
+        os: linux
+        jdk: oraclejdk8
+        before_install:
+        - nvm install 7
+        android:
+          components:
+            - tools
+            - platform-tools
+            - build-tools-23.0.1
+            - android-23
+            - build-tools-26.0.1
+            - android-26
+            - extra-android-m2repository
+            - extra-google-google_play_services
+            - extra-google-m2repository
+            - addon-google_apis-google-16
