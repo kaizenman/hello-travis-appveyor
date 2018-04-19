@@ -1,4 +1,6 @@
-if [! -d "build"]; then
+#!/bin/bash
+
+if [ ! -d "build" ]; then
    #create build directory if it not exist
    mkdir build
 fi
@@ -6,16 +8,20 @@ fi
 cd build
 echo "Preparing build... "
 cmake ..
-echo "Making binaries..."
+echo "Making binaries..."	
 make
 
 echo "Launching Updater"
 cd ..
 
-if [! -d "bin"]; then
+if [ ! -d "bin" ]; then
 mkdir bin
 fi
-echo "updating executable..."
-cp -vf build/bin/run_linux bin/
+echo "copying run_linux..."
+cp -uvf build/bin/run_linux bin/
+
+echo "deleting build directory..."
+rm -r build
+echo "checking for updates..."
 source updater.sh
 echo "Done"
