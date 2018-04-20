@@ -2,12 +2,11 @@ version: 1.0.{build}
 skip_non_tags: true
 configuration: Release
 before_build:
-- cmd: >-
+- ps: >-
     & ((Split-Path $MyInvocation.InvocationName) + "\install_dependencies.ps1")
-    & ((Split-Path $MyInvocation.InvocationName) + "\install.ps1")
 build:
-  project: C:\projects\hello-world\build\hello_world.sln
-  verbosity: minimal
+- ps: >-
+    & ((Split-Path $MyInvocation.InvocationName) + "\install.ps1")
 artifacts:
 - path: build\bin\Release\run_windows.exe
   name: run
