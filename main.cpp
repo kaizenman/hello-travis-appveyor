@@ -2,7 +2,7 @@
 #   include <OpenGL/gl.h>
 #   include <OpenGL/glu.h>
 #   include <GLUT/glut.h>
-#else
+#elif _WIN32
 #   include <Windows.h>
 #   include <GL/glew.h>
 #   include <gl/glu.h>
@@ -43,6 +43,7 @@ void CrossPlatformHelloFunc()
 #endif
 }
 
+#ifdef _WIN32
 void init();
 void display();
 void reshape(int w, int h);
@@ -100,3 +101,11 @@ void keyboard(unsigned char key, int x, int y)
     break;
   }
 }
+#elif
+
+int main()
+{
+  CrossPlatformHelloFunc();
+}
+
+#endif
