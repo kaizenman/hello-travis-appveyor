@@ -1,9 +1,8 @@
 version: 1.0.{build}
 skip_non_tags: true
 configuration: Release
-before_build:
+build_script:
 - ps: .\install_dependencies.ps1
-build:
 - ps: .\install.ps1"
 artifacts:
 - path: build\bin\Release\run_windows.exe
