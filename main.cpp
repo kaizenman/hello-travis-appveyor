@@ -101,7 +101,7 @@ void keyboard(unsigned char key, int x, int y)
     break;
   }
 }
-#elif
+#else
 
 int main()
 {
