@@ -5,10 +5,31 @@
 #get current location
 $DOCDIR = (Resolve-Path .\).Path
 
+Save-Module -Name 7Zip4Powershell -Path .
+function Expand-Tar($tarFile, $dest) {
+
+    $pathToModule = ".\7Zip4Powershell\1.8.0\7Zip4PowerShell.psd1"
+
+    if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
+        Import-Module $pathToModule
+    }
+
+    Expand-7Zip $tarFile $dest
+}
+
+[int]$i = 1
+foreach ( $p in(Get-ChildItem $path) ){
+
+    $newname = "File $i - " + $p
+    Rename-Item $($p.FullName) $newname -Force
+    $i++
+
+}
+
 function Resolve-MsBuild {
 	$msb2017 = Resolve-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\MSBuild\*\bin\msbuild.exe" -ErrorAction SilentlyContinue
 	if($msb2017) {
-		Write-Host "Found MSBuild 2017 (or later)."
+		Write-Host "Found MSBuild 2017 (or later)."ta
 		Write-Host $msb2017
 		return $msb2017
 	}
@@ -23,16 +44,6 @@ function Resolve-MsBuild {
 	Write-Host $msBuild2015
 
 	return $msBuild2015
-}
-
-Register-PSRepository -Default
-function Expand-Tar($tarFile, $dest) {
-
-    if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
-        Install-Package -Scope CurrentUser -Force 7Zip4PowerShell > $null
-    }
-
-    Expand-7Zip $tarFile $dest
 }
 
 #--------- CODE STARTS HERE -------------------------------------------------------
@@ -101,8 +112,8 @@ Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.exp" -D
 cd $DOCDIR
 if(!(Test-Path -Path $DOCDIR"\freeglut-3.0.0")){
 Invoke-WebRequest https://netix.dl.sourceforge.net/project/freeglut/freeglut/3.0.0/freeglut-3.0.0.tar.gz -Out freeglut-3.0.0.tar.gz -UseBasicParsing
-Expand-Tar freeglut-3.0.0.tar.gz .
-Expand-Tar freeglut-3.0.0.tar .
+Expand-Tar freeglut-3.0.0.tar.gz freeglut-3.0.0.tar
+Expand-Tar freeglut-3.0.0.tar freeglut-3.0.0
 del freeglut-3.0.0.tar.gz -Force
 del freeglut-3.0.0.tar -Force
 }
