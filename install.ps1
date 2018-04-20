@@ -43,11 +43,13 @@ Copy-Item -Path $DOCDIR"\Build\bin\Release\run_windows.exe" -Destination $DOCDIR
 
 #delete Buld directory
 Write-Host "Deleting Build directory"
-cd ..
+
 Remove-Item -Path $DOCDIR"\Build" -Recurse -Force
 
-#launch updater
-echo "Launching Updater..."
+cd $DOCDIR
 
-& ((Split-Path $MyInvocation.InvocationName) + "\updater.ps1")
+#launch updater
+#echo "Launching Updater..."
+
+#& ((Split-Path $MyInvocation.InvocationName) + "\updater.ps1")
 Write-Host "Done"

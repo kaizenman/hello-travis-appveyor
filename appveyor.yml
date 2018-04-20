@@ -3,11 +3,8 @@ skip_non_tags: true
 configuration: Release
 before_build:
 - cmd: >-
-    mkdir build
-
-    cd build
-
-    cmake ..
+    & ((Split-Path $MyInvocation.InvocationName) + "\install_dependencies.ps1")
+    & ((Split-Path $MyInvocation.InvocationName) + "\install.ps1")
 build:
   project: C:\projects\hello-world\build\hello_world.sln
   verbosity: minimal
