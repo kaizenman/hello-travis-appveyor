@@ -25,6 +25,7 @@ function Resolve-MsBuild {
 	return $msBuild2015
 }
 
+Register-PSRepository -Default
 function Expand-Tar($tarFile, $dest) {
 
     if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
