@@ -4,11 +4,12 @@ configuration: Release
 build_script:
 - ps: .\install_dependencies.ps1
 - ps: .\install.ps1
+- ps: Compress-Archive -Path .\bin -DestinationPath .\run_windows.zip
 artifacts:
-- path: bin\run_windows.exe
+- path: .\run_windows.zip
   name: run
 deploy:
 - provider: GitHub
   auth_token:
     secure: ZZGt/h/YLoN5R39t8OtV6KxrySfxg1YunMn3pJalG4z9zlVTABCf0NjHFySzXpzi
-  artifact: bin\run_windows.exe
+  artifact: .\run_windows.zip
