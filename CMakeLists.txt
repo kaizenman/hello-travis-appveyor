@@ -43,6 +43,9 @@ if(UNIX AND NOT APPLE)
 endif()
 if(LINUX)
   add_executable(run_linux ${SOURCE_FILES})
+  find_package(OpenGL REQUIRED)
+  include_directories(${OPENGL_INCLUDE_DIRS})
+  target_link_libraries(run_linux glfw ${OPENGL_LIBRARIES})
 endif()
 
 
