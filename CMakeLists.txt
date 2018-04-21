@@ -18,6 +18,7 @@ if(WIN32)
   set(ALL_LIBS
      freeglut
      glew32
+     glfw3
   )
 
  link_directories(${DYNAMIC_LIBRARY_DIR})
