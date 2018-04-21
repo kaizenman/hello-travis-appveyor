@@ -13,6 +13,10 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
   then echo "Installing for Linux"
   sudo apt-get install xorg-dev libglu1-mesa-dev
 
+if [ ! -d "glfw" ]; then
+   mkdir glfw
+fi
+cd glfw
   git clone https://github.com/glfw/glfw \
     && mkdir build \
     && cd build \
