@@ -4,6 +4,7 @@ os:
 language: 
 - cpp
 sudo: required
+dist: trusty
 before_script: bash install_dependencies.sh
 script: bash install.sh
 before_deploy:
