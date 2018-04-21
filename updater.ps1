@@ -2,7 +2,7 @@
 
 # Download latest dotnet/codeformatter release from github
 $repo = "makolyan/hello-world"
-$file = "run_windows.exe"
+$file = "run_windows.zip"
 
 $releases = "https://api.github.com/repos/$repo/releases"
 
@@ -11,7 +11,11 @@ $tag = (Invoke-WebRequest $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_
 
 $download = "https://github.com/$repo/releases/download/$tag/$file"
 $name = $file.Split(".")[0]
-$exe = "bin\$name.exe"
+$zip = "$name.zip"
 
 Write-Host Dowloading latest release
-Invoke-WebRequest $download -Out $exe -UseBasicParsing
+Invoke-WebRequest $download -Out $zip -UseBasicParsing
+
+
+Expand-Archive -Path $zip -Force -DestinationPath  .\".latest"
+del $zip -Force
