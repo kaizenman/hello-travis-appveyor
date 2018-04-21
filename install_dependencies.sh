@@ -11,7 +11,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]];
   cd "$currentDir"
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
   then echo "Installing for Linux"
-  sudo apt-get install xorg-dev libglu1-mesa-dev mesa-utils
+  sudo apt-get install xorg-dev libgl1-mesa-dev libglu1-mesa-dev mesa-utils
 
   git clone https://github.com/glfw/glfw \
     && cd glfw \
