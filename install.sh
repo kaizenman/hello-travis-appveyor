@@ -18,5 +18,5 @@ cd ..
 if [ ! -d "bin" ]; then
    mkdir bin
 fi
-cp -vf build/bin/run_darwin bin/"$filename"
+cp -vf build/bin/"$filename" bin/"$filename"
 rm -r build
