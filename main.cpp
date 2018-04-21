@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 #   include <OpenGL/gl.h>
-#   include <GLFW/glfw3.h>ß
+#   include <GLFW/glfw3.h>
 #elif _WIN32
 #   include <Windows.h>
 #   include <GL/glew.h>
