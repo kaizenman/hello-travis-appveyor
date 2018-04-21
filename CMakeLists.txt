@@ -46,7 +46,7 @@ if(LINUX)
   find_package(OpenGL REQUIRED)
   set(INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../.include")
   include_directories(${OPENGL_INCLUDE_DIRS} ${INCLUDE_DIR})
-  target_link_libraries(run_linux glfw ${OPENGL_LIBRARIES})
+  target_link_libraries(run_linux glfw3 ${OPENGL_LIBRARIES})
 endif()
 
 
