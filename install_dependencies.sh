@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #--------- CODE STARTS HERE -------------------------------------------------------
 currentDir=`pwd`
 

@@ -20,9 +20,6 @@ if(WIN32)
      glew32
   )
 
- # add_library(freeglut_static STATIC main.cpp)
- # add_library(glew32 STATIC main.cpp)
- # add_library(glfw3 STATIC main.cpp)
  link_directories(${DYNAMIC_LIBRARY_DIR})
  link_directories(${STATIC_LIBRARY_DIR})
 
@@ -35,6 +32,9 @@ endif()
 
 if(APPLE)
   add_executable(run_darwin ${SOURCE_FILES})
+  find_package(OpenGL REQUIRED)
+  include_directories(${OPENGL_INCLUDE_DIRS})
+  target_link_libraries(run_darwin glfw ${OPENGL_LIBRARIES})
 endif()
 
 if(UNIX AND NOT APPLE)

@@ -1,7 +1,6 @@
 #ifdef __APPLE__
 #   include <OpenGL/gl.h>
-#   include <OpenGL/glu.h>
-#   include <GLUT/glut.h>
+#   include <GLFW/glfw3.h>ß
 #elif _WIN32
 #   include <Windows.h>
 #   include <GL/glew.h>
@@ -43,69 +42,45 @@ void CrossPlatformHelloFunc()
 #endif
 }
 
-#ifdef _WIN32
-void init();
-void display();
-void reshape(int w, int h);
-void keyboard(unsigned char key, int x, int y);
-
 int main(int argc, char ** argv) {
   CrossPlatformHelloFunc();
-  glutInit(&argc, argv);
-  glutInitWindowSize(512, 512);
-#ifdef __APPLE_
-  glutInitDisplayMOde(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-#else
-  glutInitContextVersion(3, 2);
-  glutInitContextProfile(GLUT_CORE_PROFILE);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+  if (!glfwInit()) {
+      fprintf( stderr, "Failed to initialize GLFW\n");
+      return -1;
+    }
+
+#ifdef __APPLE__
+  /* We need to explicitly ask for a 3.2 context on OS X */
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
-  glutCreateWindow("OpenGL Template");
-  glewExperimental = GL_TRUE;
-  
-  glewInit();
 
-  init();
 
-  // Register Callback functions
-  glutDisplayFunc(display);
-  glutKeyboardFunc(keyboard);
-  glutReshapeFunc(reshape);
+    // Open a window and create its OpenGL context
+  GLFWwindow* window;
+  window = glfwCreateWindow(1024, 768, "Turtorial 1", NULL, NULL);
+  if (window == NULL) {
+    fprintf(stderr, "Failed to open GLFW window");
+    glfwTerminate();
+    return -1;
+  }
 
-  glutMainLoop();
+  glfwMakeContextCurrent(window);
 
+  while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0)
+  {
+    /* Render here */
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the buffers
+
+    /* Swap front and back buffers */
+    glfwSwapBuffers(window);
+
+    /* Poll for and process events */
+    glfwPollEvents();
+  }
+
+  glfwTerminate();
   return 0;
 }
-
-void init()
-{
-
-}
-
-void reshape(int w, int h)
-{
-
-}
-
-void display()
-{
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-  switch (key) {
-  case 033: // Escape key
-  case 'q':
-  case 'Q':
-    exit(EXIT_SUCCESS);
-    break;
-  }
-}
-#else
-
-int main()
-{
-  CrossPlatformHelloFunc();
-}
-
-#endif
