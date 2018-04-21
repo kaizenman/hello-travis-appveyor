@@ -12,22 +12,22 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]];
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
   then echo "Installing for Linux"
   sudo apt-get install xorg-dev libglu1-mesa-dev
-  echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-  echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-  sudo apt-get update
-  yes | sudo apt-get install libglfw3 libglfw3-dev
-#if [ ! -d "glfw" ]; then
-#   mkdir glfw
-#fi
-#cd glfw
-#  git clone https://github.com/glfw/glfw \
-#    && mkdir build \
-#    && cd build \
-#    && cmake ../glfw && make -j4 \
-#    && sudo make install
 
-#  cd "$currentDir"
-#  sudo rm -r glfw
+  git clone https://github.com/glfw/glfw \
+    && cd glfw
+    && mkdir build \
+    && cd build \
+    && cmake ../glfw && make -j4 \
+    && sudo make install
+
+  cd "$currentDir"
+
+  if [ ! -d "./.include" ]; then
+   mkdir ./.include
+  fi
+
+  cp -Rv ./glfw/include ./.include 
+  sudo rm -r glfw
 fi
 
 #--------- GET GLEW ----------------------------------------------------------------------------------
