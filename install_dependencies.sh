@@ -12,19 +12,19 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]];
 elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
   then echo "Installing for Linux"
   sudo apt-get install xorg-dev libglu1-mesa-dev
+  yes | sudo apt-get install libglfw3-dev libglfw3
+#if [ ! -d "glfw" ]; then
+#   mkdir glfw
+#fi
+#cd glfw
+#  git clone https://github.com/glfw/glfw \
+#    && mkdir build \
+#    && cd build \
+#    && cmake ../glfw && make -j4 \
+#    && sudo make install
 
-if [ ! -d "glfw" ]; then
-   mkdir glfw
-fi
-cd glfw
-  git clone https://github.com/glfw/glfw \
-    && mkdir build \
-    && cd build \
-    && cmake ../glfw && make -j4 \
-    && sudo make install
-
-  cd "$currentDir"
-  sudo rm -r glfw
+#  cd "$currentDir"
+#  sudo rm -r glfw
 fi
 
 #--------- GET GLEW ----------------------------------------------------------------------------------
