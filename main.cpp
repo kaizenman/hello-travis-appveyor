@@ -8,8 +8,8 @@
 #   include <GLFW/glfw3.h>
 #   include <GL/freeglut.h>
 #elif __linux__
-#   include <GLFW/glfw3.h>
 #   include <GL/gl.h>
+#   include <GLFW/glfw3.h>
 #endif
 #include <iostream>
 
