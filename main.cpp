@@ -58,8 +58,7 @@ int main(int argc, char ** argv) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
 
-
-    // Open a window and create its OpenGL context
+  // Open a window and create its OpenGL context
   GLFWwindow* window;
   window = glfwCreateWindow(1024, 768, "Turtorial 1", NULL, NULL);
   if (window == NULL) {

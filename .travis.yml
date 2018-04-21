@@ -3,13 +3,8 @@ os:
 - osx
 language: 
 - cpp
-script:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install glfw ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install libglfw3 ; fi
-- mkdir build
-- cd build
-- cmake ..
-- make
+before_script: bash install_dependencies.sh
+script: bash install.sh
 before_deploy:
 - git config --local user.name makolyan
 - git config --local user.email makolyan2@ukr.net

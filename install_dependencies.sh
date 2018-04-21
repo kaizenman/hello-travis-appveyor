@@ -1,25 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 #--------- CODE STARTS HERE -------------------------------------------------------
+echo "Installing for Linux"
+
+#--------- glfw ------------------------------
 currentDir=`pwd`
-
-if [ ! -d "glfw" ]; then
-   git clone -q https://github.com/glfw/glfw.git
-else
-   git pull -q
+if [[ "$TRAVIS_OS_NAME" == "osx" ]];
+  then brew install glfw; 
+elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
+  then git clone https://github.com/glfw/glfw \
+    && mkdir build \
+    && cd build \
+    && cmake ../glfw && make -j4 \
+    && sudo make install
 fi
-
-cd glfw
-if [ ! -d "glfw/Build" ]; then
-   mkdir Build
-fi
-
-cd Build
-cmake ..
-make
-
-#---------- GET GLFW ------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------
-
+cd $currentDir
 
 #--------- GET GLEW ----------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------------------------
