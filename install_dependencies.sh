@@ -26,7 +26,7 @@ elif [[ "$TRAVIS_OS_NAME" == "linux" ]];
    mkdir ./.include
   fi
 
-  cp -Rv ./glfw/include/ ./.include 
+  cp -av ./glfw/include/. ./.include/ 
   sudo rm -r glfw
 fi
 
