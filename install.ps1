@@ -41,14 +41,14 @@ if(!(Test-Path -Path $DOCDIR"/bin")){
 #copy binary
 Copy-Item -Path $DOCDIR"\Build\bin\Release\run_windows.exe" -Destination $DOCDIR"\bin\run_windows.exe"
 
+cd $DOCDIR
 #delete Buld directory
 Write-Host "Deleting Build directory"
-
 Remove-Item -Path $DOCDIR"\Build" -Recurse -Force
 
-cd $DOCDIR
 
 #launch updater
+
 #echo "Launching Updater..."
 
 #& ((Split-Path $MyInvocation.InvocationName) + "\updater.ps1")

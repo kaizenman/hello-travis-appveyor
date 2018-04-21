@@ -17,15 +17,6 @@ function Expand-Tar($tarFile, $dest) {
     Expand-7Zip $tarFile $dest
 }
 
-[int]$i = 1
-foreach ( $p in(Get-ChildItem $path) ){
-
-    $newname = "File $i - " + $p
-    Rename-Item $($p.FullName) $newname -Force
-    $i++
-
-}
-
 function Resolve-MsBuild {
 	$msb2017 = Resolve-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\MSBuild\*\bin\msbuild.exe" -ErrorAction SilentlyContinue
 	if($msb2017) {
@@ -66,11 +57,11 @@ cmake ..
 $msBuild = Resolve-MsBuild
 & $msBuild "src/glfw.vcxproj" /verbosity:minimal /p:Configuration=Release /property:Platform=x86
 
-if(!(Test-Path -Path $DOCDIR"/lib")){
-    New-Item -ItemType directory -Path $DOCDIR"/lib"
+if(!(Test-Path -Path $DOCDIR"/.lib")){
+    New-Item -ItemType directory -Path $DOCDIR"/.lib"
 }
 
-Copy-Item -Path $DOCDIR"\glfw\Build\src\Release\glfw3.lib" -Destination $DOCDIR"\lib\glfw3.lib"
+Copy-Item -Path $DOCDIR"\glfw\Build\src\Release\glfw3.lib" -Destination $DOCDIR"\.lib\glfw3.lib"
 #-----------------------------------------------------------------------------------------------
 
 
@@ -78,7 +69,7 @@ Copy-Item -Path $DOCDIR"\glfw\Build\src\Release\glfw3.lib" -Destination $DOCDIR"
 cd $DOCDIR
 if(!(Test-Path -Path $DOCDIR"\glew")){
 Invoke-WebRequest https://netix.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.zip -Out glew-2.1.0.zip -UseBasicParsing
-Expand-Archive -Path .\glew-2.1.0.zip -DestinationPath .
+Expand-Archive -Path .\glew-2.1.0.zip -Force -DestinationPath  .
 del glew-2.1.0.zip -Force
 }
 
@@ -101,19 +92,19 @@ if(!(Test-Path -Path $DOCDIR"/bin")){
 Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\bin\Release\glew32.dll" -Destination $DOCDIR"\bin\glew32.dll"
 Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\bin\Release\glewinfo.exe" -Destination $DOCDIR"\bin\glewinfo.exe"
 if(!(Test-Path -Path $DOCDIR"/lib")){
-    New-Item -ItemType directory -Path $DOCDIR"/lib"
+    New-Item -ItemType directory -Path $DOCDIR"/.lib"
 }
-Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\libglew32.lib" -Destination $DOCDIR"\lib\libglew32.lib"
-Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.lib" -Destination $DOCDIR"\lib\glew32.lib"
-Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.exp" -Destination $DOCDIR"\lib\glew32.exp"
+Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\libglew32.lib" -Destination $DOCDIR"\.lib\libglew32.lib"
+Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.lib" -Destination $DOCDIR"\.lib\glew32.lib"
+Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.exp" -Destination $DOCDIR"\.lib\glew32.exp"
 #-------------------------------------------------------------------------------------------------------------------
 
 #---------GET FREE GLUT --------------------------------------------------------------------------------------------
 cd $DOCDIR
 if(!(Test-Path -Path $DOCDIR"\freeglut-3.0.0")){
 Invoke-WebRequest https://netix.dl.sourceforge.net/project/freeglut/freeglut/3.0.0/freeglut-3.0.0.tar.gz -Out freeglut-3.0.0.tar.gz -UseBasicParsing
-Expand-Tar freeglut-3.0.0.tar.gz freeglut-3.0.0.tar
-Expand-Tar freeglut-3.0.0.tar freeglut-3.0.0
+Expand-Tar freeglut-3.0.0.tar.gz .
+Expand-Tar freeglut-3.0.0.tar .
 del freeglut-3.0.0.tar.gz -Force
 del freeglut-3.0.0.tar -Force
 }
@@ -133,12 +124,31 @@ if(!(Test-Path -Path $DOCDIR"/bin")){
     New-Item -ItemType directory -Path $DOCDIR"/bin"
 }
 Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\bin\Release\freeglut.dll" -Destination $DOCDIR"\bin\freeglut.dll"
-if(!(Test-Path -Path $DOCDIR"/lib")){
-    New-Item -ItemType directory -Path $DOCDIR"/lib"
+if(!(Test-Path -Path $DOCDIR"/.lib")){
+    New-Item -ItemType directory -Path $DOCDIR"/.lib"
 }
-Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut.lib" -Destination $DOCDIR"\lib\freeglut.lib"
-Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut.exp" -Destination $DOCDIR"\lib\freeglut.exp"
-Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut_static.lib" -Destination $DOCDIR"\lib\freeglut_static.lib"
+Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut.lib" -Destination $DOCDIR"\.lib\freeglut.lib"
+Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut.exp" -Destination $DOCDIR"\.lib\freeglut.exp"
+Copy-Item -Path $DOCDIR"\freeglut-3.0.0\build\lib\Release\freeglut_static.lib" -Destination $DOCDIR"\.lib\freeglut_static.lib"
+
+if(!(Test-Path -Path $DOCDIR"\.include")){
+    New-Item -ItemType directory -Path $DOCDIR"\.include"
+}
+if(!(Test-Path -Path $DOCDIR"/.include/GL")){
+    New-Item -ItemType directory -Path $DOCDIR"/.include/GL"
+}
+
+Copy-Item -Force -Recurse -Verbose $DOCDIR"\freeglut-3.0.0\include\GL" -Destination $DOCDIR"\.include\"
+Copy-Item -Force -Recurse -Verbose $DOCDIR"\glew-2.1.0\include\GL" -Destination $DOCDIR"\.include\"
+Copy-Item -Force -Recurse -Verbose $DOCDIR"\glfw\include\GLFW" -Destination $DOCDIR"\.include\"
+
+
+
 #----------------------------------------------------------------------------------------------------------------------------------
+cd $DOCDIR
+Remove-Item -Path $DOCDIR"\7Zip4Powershell" -Recurse
+Remove-Item -Path $DOCDIR"\freeglut-3.0.0" -Recurse -Force
+Remove-Item -Path $DOCDIR"\glew-2.1.0" -Recurse -Force
+Remove-Item -Path $DOCDIR"\glfw" -Recurse -Force
 
 #src/Release

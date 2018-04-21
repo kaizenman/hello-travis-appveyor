@@ -4,27 +4,17 @@ project(hello_world)
 set(CMAKE_CXX_STANDARD 11)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(SOURCE_FILES main.cpp)
 
 if(WIN32)
   set(DYNAMIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-  set(STATIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
+  set(STATIC_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.lib")
 
-  # FREE GLUT
-  set(OPENGL_GLUT_INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../freeglut-3.0.0/include")
-  
-  # GLEW
-  set(OPENGL_GLEW_INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../glew-2.1.0/include")
-
-  # GLFW
-  set(OPENGL_GLFW_INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../glfw/include")
-
-  include_directories(${OPENGL_GLUT_INCLUDE_DIR})
-  include_directories(${OPENGL_GLEW_INCLUDE_DIR})
-  include_directories(${OPENGL_GLFW_INCLUDE_DIR})
-
+  set(INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../.include")
+  include_directories(${INCLUDE_DIR})
   set(ALL_LIBS
      freeglut
      glew32
