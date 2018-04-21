@@ -4,6 +4,7 @@ os:
 language: 
 - cpp
 script:
+- brew install glfw
 - mkdir build
 - cd build
 - cmake ..

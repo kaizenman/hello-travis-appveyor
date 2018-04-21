@@ -5,6 +5,7 @@
 #   include <Windows.h>
 #   include <GL/glew.h>
 #   include <gl/glu.h>
+#   include <GLFW/glfw3.h>
 #   include <GL/freeglut.h>
 #endif
 #include <iostream>
