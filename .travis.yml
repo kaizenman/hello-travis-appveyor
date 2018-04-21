@@ -3,6 +3,7 @@ os:
 - osx
 language: 
 - cpp
+sudo: required
 before_script: bash install_dependencies.sh
 script: bash install.sh
 before_deploy:
