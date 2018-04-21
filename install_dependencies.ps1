@@ -1,11 +1,5 @@
-#download glfw source and unpack 
-#Invoke-WebRequest https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip -Out glfw-3.2.1.bin.WIN64.zip -UseBasicParsing
-#Expand-Archive -Path .\glfw3.zip -DestinationPath .
-
 #get current location
 $DOCDIR = (Resolve-Path .\).Path
-
-
 
 #======================== TAR TOOL =====================================================================
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -30,8 +24,6 @@ Expand-Archive -Path .\$zip -Force -DestinationPath  .\$name
 del $zip -Force
 
 #===================================================================================================================
-
-
 
 Invoke-WebRequest https://netix.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.zip -Out glew-2.1.0.zip -UseBasicParsing
 
@@ -159,13 +151,9 @@ Copy-Item -Force -Recurse -Verbose $DOCDIR"\freeglut-3.0.0\include\GL" -Destinat
 Copy-Item -Force -Recurse -Verbose $DOCDIR"\glew-2.1.0\include\GL" -Destination $DOCDIR"\.include\"
 Copy-Item -Force -Recurse -Verbose $DOCDIR"\glfw\include\GLFW" -Destination $DOCDIR"\.include\"
 
-
-
 #----------------------------------------------------------------------------------------------------------------------------------
 cd $DOCDIR
 Remove-Item -Path $DOCDIR"\freeglut-3.0.0" -Recurse -Force
 Remove-Item -Path $DOCDIR"\glew-2.1.0" -Recurse -Force
 Remove-Item -Path $DOCDIR"\glfw" -Recurse -Force
 Remove-Item -Path $DOCDIR"\TarTool" -Recurse -Force
-
-#src/Release

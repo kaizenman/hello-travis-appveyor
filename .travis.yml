@@ -4,7 +4,8 @@ os:
 language: 
 - cpp
 script:
-- brew install glfw
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install glfw ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install libglfw3 ; fi
 - mkdir build
 - cd build
 - cmake ..
