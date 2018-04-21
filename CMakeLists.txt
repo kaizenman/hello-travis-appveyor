@@ -44,9 +44,14 @@ endif()
 if(LINUX)
   add_executable(run_linux ${SOURCE_FILES})
   find_package(OpenGL REQUIRED)
+  add_definitions(${OPENGL_DEFINITIONS})
+  find_package(X11 REQUIRED)
+  # note that the order is important for setting the libs
+  # use pkg-config --libs $(pkg-config --print-requires --print-requires-private glfw3) in a terminal to confirm
+  set(LIBS glfw3 X11 Xrandr Xinerama Xi Xxf86vm Xcursor gl)
   set(INCLUDE_DIR "{CMAKE_CURRENT_SOURCE_DIR}/../.include")
   include_directories(${OPENGL_INCLUDE_DIRS} ${INCLUDE_DIR})
-  target_link_libraries(run_linux glfw3 ${OPENGL_LIBRARIES})
+  target_link_libraries(run_linux ${LIBS} ${OPENGL_LIBRARIES})
 endif()
 
 
