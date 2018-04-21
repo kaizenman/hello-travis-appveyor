@@ -5,17 +5,35 @@
 #get current location
 $DOCDIR = (Resolve-Path .\).Path
 
-Save-Module -Name 7Zip4Powershell -Path .
-function Expand-Tar($tarFile, $dest) {
 
-    $pathToModule = ".\7Zip4Powershell\1.8.0\7Zip4PowerShell.psd1"
 
-    if (-not (Get-Command Expand-7Zip -ErrorAction Ignore)) {
-        Import-Module $pathToModule
-    }
+#======================== TAR TOOL =====================================================================
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-    Expand-7Zip $tarFile $dest
-}
+# Download latest dotnet/codeformatter release from github
+$repo = "senthilrajasek/tartool"
+$file = "TarTool.zip"
+
+$releases = "https://api.github.com/repos/$repo/releases"
+
+Write-Host Determining latest release
+$tag = (Invoke-WebRequest $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name
+
+$download = "https://github.com/$repo/releases/download/$tag/$file"
+$name = $file.Split(".")[0]
+$zip = "$name.zip"
+
+Write-Host Dowloading latest release
+Invoke-WebRequest $download -Out $zip -UseBasicParsing
+
+Expand-Archive -Path .\$zip -Force -DestinationPath  .\$name
+del $zip -Force
+
+#===================================================================================================================
+
+
+
+Invoke-WebRequest https://netix.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.zip -Out glew-2.1.0.zip -UseBasicParsing
 
 function Resolve-MsBuild {
 	$msb2017 = Resolve-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\MSBuild\*\bin\msbuild.exe" -ErrorAction SilentlyContinue
@@ -91,7 +109,7 @@ if(!(Test-Path -Path $DOCDIR"/bin")){
 }
 Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\bin\Release\glew32.dll" -Destination $DOCDIR"\bin\glew32.dll"
 Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\bin\Release\glewinfo.exe" -Destination $DOCDIR"\bin\glewinfo.exe"
-if(!(Test-Path -Path $DOCDIR"/lib")){
+if(!(Test-Path -Path $DOCDIR"/.lib")){
     New-Item -ItemType directory -Path $DOCDIR"/.lib"
 }
 Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\libglew32.lib" -Destination $DOCDIR"\.lib\libglew32.lib"
@@ -103,10 +121,9 @@ Copy-Item -Path $DOCDIR"\glew-2.1.0\build\cmake\build\lib\Release\glew32.exp" -D
 cd $DOCDIR
 if(!(Test-Path -Path $DOCDIR"\freeglut-3.0.0")){
 Invoke-WebRequest https://netix.dl.sourceforge.net/project/freeglut/freeglut/3.0.0/freeglut-3.0.0.tar.gz -Out freeglut-3.0.0.tar.gz -UseBasicParsing
-Expand-Tar freeglut-3.0.0.tar.gz .
-Expand-Tar freeglut-3.0.0.tar .
+
+& ".\TarTool\TarTool.exe" ".\freeglut-3.0.0.tar.gz" ./
 del freeglut-3.0.0.tar.gz -Force
-del freeglut-3.0.0.tar -Force
 }
 cd $DOCDIR"\freeglut-3.0.0"
 
@@ -146,9 +163,9 @@ Copy-Item -Force -Recurse -Verbose $DOCDIR"\glfw\include\GLFW" -Destination $DOC
 
 #----------------------------------------------------------------------------------------------------------------------------------
 cd $DOCDIR
-Remove-Item -Path $DOCDIR"\7Zip4Powershell" -Recurse
 Remove-Item -Path $DOCDIR"\freeglut-3.0.0" -Recurse -Force
 Remove-Item -Path $DOCDIR"\glew-2.1.0" -Recurse -Force
 Remove-Item -Path $DOCDIR"\glfw" -Recurse -Force
+Remove-Item -Path $DOCDIR"\TarTool" -Recurse -Force
 
 #src/Release
