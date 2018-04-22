@@ -15,6 +15,7 @@
 #   include <GL/gl.h>
 #   include <GLFW/glfw3.h>
 #   include <GL/glx.h>
+#   include <gl/GLU.h>
 #endif
 #include <iostream>
 
