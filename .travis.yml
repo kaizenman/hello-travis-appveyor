@@ -5,6 +5,10 @@ language:
 - cpp
 sudo: required
 dist: trusty
+branches:
+  only:
+  - dev
+  - release
 before_script: bash install_dependencies.sh
 script: bash install.sh
 before_deploy:
@@ -21,4 +25,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: makolyan/hello-world
-    all_branches: true
+    branch: release
