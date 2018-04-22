@@ -52,19 +52,6 @@ void CrossPlatformHelloFunc()
 #endif
 }
 
-// X11 OpenGL window
-#ifdef __linux__
-Display                 *dpy;
-Window                  root;
-GLint                   att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
-XVisualInfo             *vi;
-Colormap                cmap;
-XSetWindowAttributes    swa;
-Window                  win;
-GLXContext              glc;
-XWindowAttributes       gwa;
-XEvent                  xev;
-
 void DrawAQuad() {
   glClearColor(1.0, 1.0, 1.0, 1.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -84,6 +71,19 @@ void DrawAQuad() {
   glColor3f(1., 1., 0.); glVertex3f(-.75, .75, 0.);
   glEnd();
 }
+
+// X11 OpenGL window
+#ifdef __linux__
+Display                 *dpy;
+Window                  root;
+GLint                   att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
+XVisualInfo             *vi;
+Colormap                cmap;
+XSetWindowAttributes    swa;
+Window                  win;
+GLXContext              glc;
+XWindowAttributes       gwa;
+XEvent                  xev;
 
 int main(int argc, char *argv[]) {
 
@@ -173,6 +173,8 @@ int main(int argc, char ** argv) {
   {
     /* Render here */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the buffers
+    glViewport(0, 0, 1024, 768);
+    DrawAQuad();
 
     /* Swap front and back buffers */
     glfwSwapBuffers(window);
