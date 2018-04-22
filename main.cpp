@@ -14,7 +14,7 @@
 #   include <X11/Xlib.h>
 #   include <GL/gl.h>
 #   include <GLFW/glfw3.h>
-#   include <GL/glxew.h>
+#   include <GL/glx.h>
 #endif
 #include <iostream>
 
