@@ -21,4 +21,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: makolyan/hello-world
-    all_branches: true
+    branch: release
+    condition: '[ "${TRAVIS_PULL_REQUEST}" = "false" ]'
