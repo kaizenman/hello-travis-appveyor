@@ -1,7 +1,7 @@
 os:
 - linux
 - osx
-language: 
+language:
 - cpp
 sudo: required
 dist: trusty
@@ -15,10 +15,13 @@ deploy:
   provider: releases
   api_key:
     secure: Ya8fzVgwNtLdWnxZMDH/09GAWm3lI5DXeN0gBymObgnJkHDvxXD6wNcLNN3ck0bxAwiAf0RL+19gWSGoFnrftHzqCA9XEBoXYYAjNU6CAnXcS9hmgaat41HbTXsYzY5gRa9miBPrhbGMZ9yi9X37XxnJwXYMWsUqcq10BEYVEVvld4emQH5+sGKkettqMKRI2UiBcjui8zkFfnPQa+gBekArhndfV8JPm+zVDieBcWkcfHGQdnHNbDFMtgva4HL87oxKzYJID4eFMgllTaGE0/P3QV/ee14yjpmv164VWwpABFsNuXye6ji/+/qVeZ5kJqzMiVvENVFOvuiyFoB5rBDke/x9W4cmSe8SdiTeDb6+9h3W5G59Mf8ibm/wRemBz5LThHk//7smWzMfC3OYW21hfPQ/paqUNC0AeYZ18m+hX2YsrK8vcwBwwVYZNd4Lc+nYzlqY5pSWqyrk8Y2M/m66Roz9kTJlGxltDcJjiUp6217DS2vK3tZFOwOLNUJ97/lIX45D25HGqJMnRXSV4+MzPMVIo3ard0d5SejBzlYcH891mGA6jgqJgOqfn3ElVuOBFvTTDJLRi91Xvajj91zrrteLB70zhZKkMSyN5mG8NGCeT8gjsV4G7Y5du9NW0fvM0sOC+VY9F89Rew1xIlixV88Ssz0WaVPvGfUNM2k=
-  file: 
-  - bin/run_linux 
+  file:
+  - bin/run_linux
   - bin/run_darwin
   skip_cleanup: true
   on:
     repo: makolyan/hello-world
     all_branches: true
+notifications:
+  slack:
+    secure: M1/7UeBAvzF9OCyhxkx7pBXDi7EPoK5Xxf1ccoDhICgtxoMJPM4DuuMke6KArePdveTBI+79LKQE0wQ/7R+Bjuvcfh7fh2M/HTVo0yySLDurG1fg554gQ1GLwGiLYUksdRkfEvMWX13VgFIt/O4rJ4PDlColJkcFxnN/+XQSPmb79ZCFL7nE6IUnHAZh/vQ8Py2tekg0lOm+Olq2RqwRgYhw5GfC2tXk+nRJrvgsxQJyanshNpafKmjLsJRTMh6M3BS/dU3Yl2tEm9Wtgp3T3NrEYxcyo9H5INr+E3jSaQEARV2KnshAQsJG1tOGgGoetHVQGpRTHUbkMd+dTcLuNIb5IWV44NPaVxbA2YNULJcm7TOhlVCBv6Z9cfeLyk0NYtNkYxuXZIy3W13b02Yycdw4lqlziz3iINln+ESXHUexy/YjXkOc5MRy+GegEUahuYdhtOS3pyfotMAPlRqeVBhckDMxrF0k7SrY2usWY/khct6Ij0U0iefqyH/ntywzMFandGO/wZldjww8tCYG3xTbxszYti2XGjMTlcUjtdTa8kcNBTlJAI6YTpvXSNKJRCmz641QCpsDd4jPyAO0NKQsc4LvJNkrh/VztSL+GjQiX589MftZSg2e+945xpUbnyvhDAQ4vvIhAh012xW6JsWLYqTp2uNzZJawqUsMDXQ=

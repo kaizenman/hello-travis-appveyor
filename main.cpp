@@ -172,6 +172,8 @@ int main(int argc, char ** argv) {
 
   glfwMakeContextCurrent(window);
 
+  glEnable(GL_DEPTH_TEST);
+
   while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0)
   {
     /* Render here */
