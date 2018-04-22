@@ -1,6 +1,7 @@
 #ifdef __APPLE__
 #   include <OpenGL/gl.h>
 #   include <GLFW/glfw3.h>
+#   include <OpenGL/glu.h>
 #elif _WIN32
 #   include <Windows.h>
 #   include <GL/glew.h>
@@ -62,6 +63,7 @@ void DrawAQuad() {
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
   gluLookAt(0., 0., 10., 0., 0., 0., 0., 1., 0.);
 
   glBegin(GL_QUADS);
@@ -150,12 +152,13 @@ int main(int argc, char ** argv) {
       return -1;
     }
 
+// @TODO: need to understand what it is
 #ifdef __APPLE__
   /* We need to explicitly ask for a 3.2 context on OS X */
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+ // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+ // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+ // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+ // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
   glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
   // Open a window and create its OpenGL context
