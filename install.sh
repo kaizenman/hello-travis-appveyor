@@ -20,3 +20,6 @@ if [ ! -d "bin" ]; then
 fi
 cp -vf build/bin/"$filename" bin/"$filename"
 rm -r build
+
+echo "Hello"
+echo "OK"
