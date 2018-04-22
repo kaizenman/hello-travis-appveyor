@@ -109,20 +109,6 @@ if(LINUX)
 	    XRANDR_LIBRARY)
 
  # ======================= END ======================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   #pkg_check_modules(FOO REQUIRED glfw3 X11 Xrandr Xinerama Xi Xxf86vm Xcursor GL)
   # note that the order is important for setting the libs
   # use pkg-config --libs $(pkg-config --print-requires --print-requires-private glfw3) in a terminal to confirm

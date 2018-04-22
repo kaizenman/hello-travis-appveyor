@@ -16,7 +16,7 @@
 void CrossPlatformHelloFunc()
 {
 #ifdef _WIN32
-	//define something for Windows (32-bit and 64-bit, this part is common)
+	//define something for Windows (32-bit and 64-bit, t  his part is common)
 	std::cout << "Hello, Windows!" << std::endl;
 #ifdef _WIN64
 	//define something for Windows (64-bit only)
@@ -61,6 +61,11 @@ int main(int argc, char ** argv) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
 
+
+#ifdef __linux__
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+#endif
   // Open a window and create its OpenGL context
   GLFWwindow* window;
   window = glfwCreateWindow(1024, 768, "Turtorial 1", NULL, NULL);
