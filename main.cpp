@@ -183,7 +183,7 @@ int main(int argc, char ** argv) {
 
     /* Swap front and back buffers */
     glfwSwapBuffers(window);
-
+    std::cout << "From my branch";
     /* Poll for and process events */
     glfwPollEvents();
   }
