@@ -11,6 +11,8 @@ deploy:
     secure: ZZGt/h/YLoN5R39t8OtV6KxrySfxg1YunMn3pJalG4z9zlVTABCf0NjHFySzXpzi
   artifact: run_windows.zip
   provider: GitHub
+  on:
+    appveyor_repo_tag: true
 
 branches:
   only:
