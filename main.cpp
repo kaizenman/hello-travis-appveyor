@@ -187,6 +187,7 @@ int main(int argc, char ** argv) {
     /* Poll for and process events */
     glfwPollEvents();
   }
+  std::cout << "Hey";
   glfwTerminate();
   return 0;
 }
