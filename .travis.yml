@@ -1,0 +1,28 @@
+os:
+- linux
+- osx
+language:
+- cpp
+sudo: required
+dist: trusty
+before_script: bash install_dependencies.sh
+script: bash install.sh
+before_deploy:
+- git config --local user.name makolyan
+- git config --local user.email makolyan2@ukr.net
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  api_key:
+    secure: Ya8fzVgwNtLdWnxZMDH/09GAWm3lI5DXeN0gBymObgnJkHDvxXD6wNcLNN3ck0bxAwiAf0RL+19gWSGoFnrftHzqCA9XEBoXYYAjNU6CAnXcS9hmgaat41HbTXsYzY5gRa9miBPrhbGMZ9yi9X37XxnJwXYMWsUqcq10BEYVEVvld4emQH5+sGKkettqMKRI2UiBcjui8zkFfnPQa+gBekArhndfV8JPm+zVDieBcWkcfHGQdnHNbDFMtgva4HL87oxKzYJID4eFMgllTaGE0/P3QV/ee14yjpmv164VWwpABFsNuXye6ji/+/qVeZ5kJqzMiVvENVFOvuiyFoB5rBDke/x9W4cmSe8SdiTeDb6+9h3W5G59Mf8ibm/wRemBz5LThHk//7smWzMfC3OYW21hfPQ/paqUNC0AeYZ18m+hX2YsrK8vcwBwwVYZNd4Lc+nYzlqY5pSWqyrk8Y2M/m66Roz9kTJlGxltDcJjiUp6217DS2vK3tZFOwOLNUJ97/lIX45D25HGqJMnRXSV4+MzPMVIo3ard0d5SejBzlYcH891mGA6jgqJgOqfn3ElVuOBFvTTDJLRi91Xvajj91zrrteLB70zhZKkMSyN5mG8NGCeT8gjsV4G7Y5du9NW0fvM0sOC+VY9F89Rew1xIlixV88Ssz0WaVPvGfUNM2k=
+  file:
+  - bin/run_linux
+  - bin/run_darwin
+  on:
+    tags: false
+  provider: releases
+  skip_cleanup: true
+branches:
+  only:
+  # release tags
+  - /^v\d+\.\d+\.\d+.*$/
+  - master

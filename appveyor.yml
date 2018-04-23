@@ -1,0 +1,21 @@
+build_script:
+- ps: .\install_dependencies.ps1
+- ps: .\install.ps1
+- ps: Compress-Archive -Path .\bin -DestinationPath .\run_windows.zip
+artifacts:
+- path: .\run_windows.zip
+  name: run
+
+deploy:
+  auth_token:
+    secure: ZZGt/h/YLoN5R39t8OtV6KxrySfxg1YunMn3pJalG4z9zlVTABCf0NjHFySzXpzi
+  artifact: run_windows.zip
+  provider: GitHub
+  on:
+    appveyor_repo_tag: true
+
+branches:
+  only:
+  # Release tags
+  - /^v\d+\.\d+\.\d+.*$/ 
+  - master
