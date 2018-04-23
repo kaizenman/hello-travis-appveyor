@@ -1,6 +1,3 @@
-version: 1.0.{build}
-skip_non_tags: true
-configuration: Release
 build_script:
 - ps: .\install_dependencies.ps1
 - ps: .\install.ps1
