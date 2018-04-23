@@ -18,7 +18,7 @@ deploy:
   - bin/run_linux
   - bin/run_darwin
   on:
-    tags: true
+    tags: false
   provider: releases
   skip_cleanup: true
 branches:
