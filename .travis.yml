@@ -23,6 +23,6 @@ deploy:
   skip_cleanup: true
 branches:
   only:
-    # release tags
-    - /^v\d+\.\d+\.\d+.*$/
-    - master
+  # release tags
+  - /^v\d+\.\d+\.\d+.*$/
+  - master
