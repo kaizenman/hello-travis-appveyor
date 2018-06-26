@@ -20,6 +20,8 @@
 #endif
 #include <iostream>
 
+// comment
+
 void CrossPlatformHelloFunc()
 {
 #ifdef _WIN32
