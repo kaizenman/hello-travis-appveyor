@@ -8,7 +8,7 @@ dist: trusty
 before_script: bash install_dependencies.sh
 script: bash install.sh
 before_deploy:
-- git config --local user.name makolyan
+- git config --local user.name kaizenman
 - git config --local user.email makolyan2@ukr.net
 - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
